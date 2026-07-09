@@ -67,13 +67,14 @@ export default function HomeScreen() {
     <SafeAreaView style={[styles.flex, { backgroundColor: theme.colors.background }]} edges={['top']}>
       <View style={styles.listWrapper}>
         <TaskList
-          tasks={tasks}
-          accentColor={activeProject?.color ?? theme.colors.primary}
-          onToggle={toggleTaskStatus}
-          onEdit={(task) => router.push(`/task/${task.id}`)}
-          onDelete={deleteTask}
-          ListHeaderComponent={ListHeader}
-        />
+  tasks={tasks}
+  accentColor={activeProject?.color ?? theme.colors.primary}
+  activeProjectId={activeProject?.id}
+  onToggle={toggleTaskStatus}
+  onEdit={(task) => router.push(`/task/${task.id}`)}
+  onDelete={deleteTask}
+  ListHeaderComponent={ListHeader}
+/>
       </View>
     </SafeAreaView>
   );

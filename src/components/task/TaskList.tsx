@@ -10,6 +10,7 @@ import { useTheme } from '@/hooks/useTheme';
 interface TaskListProps {
   tasks: Task[];
   accentColor: string;
+  activeProjectId?: string;
   onToggle: (id: string) => void;
   onEdit: (task: Task) => void;
   onDelete: (id: string) => void;
@@ -19,6 +20,7 @@ interface TaskListProps {
 export const TaskList: React.FC<TaskListProps> = ({
   tasks,
   accentColor,
+  activeProjectId,
   onToggle,
   onEdit,
   onDelete,
@@ -33,18 +35,12 @@ export const TaskList: React.FC<TaskListProps> = ({
         {ListHeaderComponent}
 
         <View style={styles.empty}>
-          <Ionicons
-            name="clipboard-outline"
-            size={56}
-            color={theme.colors.textMuted}
-          />
-
           <Text
             style={[
               theme.typography.headline,
               {
                 color: theme.colors.text,
-                marginTop: 16,
+                marginTop: 20,
               },
             ]}
           >
@@ -66,15 +62,22 @@ export const TaskList: React.FC<TaskListProps> = ({
             Create your first task to start organizing your work.
           </Text>
 
-          <Pressable
-            onPress={() => router.push('/task/new')}
-            style={[
-              styles.createButton,
-              {
-                backgroundColor: theme.colors.primary,
-              },
-            ]}
-          >
+         <Pressable
+  onPress={() =>
+    router.push({
+      pathname: '/task/new',
+      params: {
+        projectId: activeProjectId,
+      },
+    })
+  }
+  style={[
+    styles.createButton,
+    {
+      backgroundColor: theme.colors.primary,
+    },
+  ]}
+>
             <Ionicons
               name="add"
               size={20}
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
   empty: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 70,
+    paddingVertical: 10,
     paddingHorizontal: 20,
   },
 
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 28,
+    marginTop: 10,
     paddingHorizontal: 22,
     paddingVertical: 14,
     borderRadius: 14,

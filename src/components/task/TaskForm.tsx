@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';import { View, Text, Pressable, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Ionicons } from '@expo/vector-icons';
 import { Input } from '@/components/ui/Input';
@@ -41,6 +40,12 @@ export const TaskForm: React.FC<TaskFormProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
+
+  useEffect(() => {
+  if (initialValues?.projectId) {
+    setProjectId(initialValues.projectId);
+  }
+}, [initialValues?.projectId]);
 
   const handleSubmit = () => {
     const validationError = validateTaskTitle(title);

@@ -32,8 +32,14 @@ export default function ProjectDetailScreen() {
           <Ionicons name="chevron-back" size={24} color={theme.colors.text} />
         </Pressable>
         <Pressable
-          onPress={() => router.push({ pathname: '/task/new', params: { projectId: project.id } })}
-          style={[styles.iconBtn, { backgroundColor: theme.colors.primary }]}
+onPress={() =>
+  router.push({
+    pathname: '/task/new',
+    params: {
+      projectId: project.id,
+    },
+  })
+}          style={[styles.iconBtn, { backgroundColor: theme.colors.primary }]}
         >
           <Ionicons name="add" size={20} color={theme.colors.onPrimary} />
         </Pressable>
@@ -49,13 +55,14 @@ export default function ProjectDetailScreen() {
       </View>
 
       <View style={{ flex: 1, paddingHorizontal: 20 }}>
-        <TaskList
-          tasks={tasks}
-          accentColor={project.color}
-          onToggle={toggleTaskStatus}
-          onEdit={(task) => router.push(`/task/${task.id}`)}
-          onDelete={deleteTask}
-        />
+       <TaskList
+  tasks={tasks}
+  accentColor={project.color}
+  activeProjectId={project.id}
+  onToggle={toggleTaskStatus}
+  onEdit={(task) => router.push(`/task/${task.id}`)}
+  onDelete={deleteTask}
+/>
       </View>
     </SafeAreaView>
   );
